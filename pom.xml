@@ -6,11 +6,13 @@
     <groupId>org.shoper.x-job</groupId>
     <artifactId>x-job</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>xjob-executor</module>
+        <module>xjob-scheduler</module>
+    </modules>
     <packaging>pom</packaging>
-
     <name>x-job</name>
     <description>Demo project for Spring Boot</description>
-
     <dependencyManagement>
         <dependencies>
             <dependency>
