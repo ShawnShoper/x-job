@@ -9,6 +9,8 @@
     <modules>
         <module>xjob-executor</module>
         <module>xjob-scheduler</module>
+        <module>xjob-container</module>
+        <module>xjob-task</module>
     </modules>
     <packaging>pom</packaging>
     <name>x-job</name>
