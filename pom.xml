@@ -12,7 +12,6 @@
         <module>xjob-container</module>
         <module>xjob-task</module>
         <module>xjob-commons</module>
-        <module>xjob-commons</module>
     </modules>
     <packaging>pom</packaging>
     <name>x-job</name>

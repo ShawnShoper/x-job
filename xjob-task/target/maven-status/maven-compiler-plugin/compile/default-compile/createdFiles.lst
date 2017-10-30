@@ -1,5 +1,0 @@
-org\xjob\task\Job.class
-org\xjob\task\model\BaseJob.class
-org\xjob\task\model\JobParam.class
-org\xjob\task\demo\DemoJob.class
-org\xjob\task\Exception\StartupException.class
