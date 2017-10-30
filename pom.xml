@@ -11,7 +11,7 @@
         <module>xjob-scheduler</module>
         <module>xjob-container</module>
         <module>xjob-task</module>
-        <module>x-job-commons</module>
+        <module>xjob-commons</module>
         <module>xjob-commons</module>
     </modules>
     <packaging>pom</packaging>
