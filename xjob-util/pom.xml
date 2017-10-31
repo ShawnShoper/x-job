@@ -9,7 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xjob-commons</artifactId>
+    <artifactId>xjob-util</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>xjob-util-zookeeper</module>
+        <module>xjob-util-log</module>
+    </modules>
 
 
 </project>

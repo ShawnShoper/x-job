@@ -3,15 +3,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.shoper.x-job</groupId>
+    <groupId>org.x.job</groupId>
     <artifactId>x-job</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>xjob-executor</module>
         <module>xjob-scheduler</module>
-        <module>xjob-container</module>
-        <module>xjob-task</module>
         <module>xjob-commons</module>
+        <module>xjob-registry</module>
+        <module>xjob-util</module>
     </modules>
     <packaging>pom</packaging>
     <name>x-job</name>
@@ -22,7 +22,15 @@
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
-                <version>1.5.6.RELEASE</version>
+                <version>1.5.8.RELEASE</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <!-- Import dependency management from Spring Cloud -->
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>Dalston.SR4</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -52,6 +60,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>1.5.8.RELEASE</version>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -71,4 +80,12 @@
             </plugin>
         </plugins>
     </build>
+    <developers>
+        <developer>
+            <email>xiehao3692@vip.qq.com</email>
+            <name>Shawn Shoper</name>
+            <id>ss</id>
+        </developer>
+
+    </developers>
 </project>
