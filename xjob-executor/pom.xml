@@ -4,16 +4,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>x-job</artifactId>
-        <groupId>org.shoper.x-job</groupId>
+        <groupId>org.x.job</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>xjob-executor</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>test</module>
-    </modules>
-
 
 </project>
