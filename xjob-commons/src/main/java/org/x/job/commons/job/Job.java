@@ -12,7 +12,7 @@ public interface Job {
 
     void start() throws StartupException;
 
-    default  void nextJob(){
+    default  void nextJob() throws StartupException {
         start();
         if(null != null) nextJob();
     }
