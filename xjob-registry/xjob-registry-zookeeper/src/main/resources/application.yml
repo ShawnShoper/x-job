@@ -1,5 +1,0 @@
-server:
-  port: 8833
-spring:
-  application:
-    name: zookeeper-discory

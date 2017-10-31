@@ -1,7 +1,5 @@
 package com.daqsoft.log.util.appender;
 
-import com.daqsoft.commons.core.DateUtil;
-import com.daqsoft.commons.core.StringUtil;
 import com.daqsoft.log.core.config.Constans;
 import com.daqsoft.log.core.serialize.Business;
 import com.daqsoft.log.core.serialize.Log;

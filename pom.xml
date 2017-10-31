@@ -5,12 +5,11 @@
 
     <groupId>org.x.job</groupId>
     <artifactId>x-job</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <modules>
         <module>xjob-executor</module>
         <module>xjob-scheduler</module>
         <module>xjob-commons</module>
-        <module>xjob-registry</module>
         <module>xjob-util</module>
     </modules>
     <packaging>pom</packaging>

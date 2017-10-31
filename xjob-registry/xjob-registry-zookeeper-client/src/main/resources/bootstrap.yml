@@ -1,8 +1,0 @@
-spring:
-  cloud:
-    zookeeper:
-      connect-string: 192.168.2.115:2181
-      discovery:
-        instance-host: 192.168.2.115
-        instance-port: 2181
-        register: false
