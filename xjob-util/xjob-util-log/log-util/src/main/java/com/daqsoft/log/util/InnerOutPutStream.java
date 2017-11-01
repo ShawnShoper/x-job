@@ -1,7 +1,7 @@
 package com.daqsoft.log.util;
 
-import com.daqsoft.commons.core.StringUtil;
 import com.daqsoft.log.core.config.Constans;
+import org.shoper.commons.core.StringUtil;
 
 import java.io.IOException;
 import java.io.OutputStream;

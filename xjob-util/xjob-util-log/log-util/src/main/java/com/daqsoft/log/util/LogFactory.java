@@ -1,7 +1,6 @@
 package com.daqsoft.log.util;
 
 
-import com.daqsoft.commons.core.StringUtil;
 import com.daqsoft.log.core.config.Target;
 import com.daqsoft.log.util.appender.Appender;
 import com.daqsoft.log.util.appender.ConsoleAppender;
@@ -11,6 +10,7 @@ import com.daqsoft.log.util.config.LogPattern;
 import com.daqsoft.log.util.config.LogProperties;
 import com.daqsoft.log.util.constans.Tag;
 import org.ho.yaml.Yaml;
+import org.shoper.commons.core.StringUtil;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

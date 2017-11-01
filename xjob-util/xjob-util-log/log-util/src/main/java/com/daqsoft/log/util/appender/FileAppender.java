@@ -7,6 +7,8 @@ import com.daqsoft.log.util.config.FileProperties;
 import com.daqsoft.log.util.config.LogPattern;
 import com.daqsoft.log.util.config.LogProperties;
 import com.daqsoft.log.util.constans.FileCap;
+import org.shoper.commons.core.DateUtil;
+import org.shoper.commons.core.StringUtil;
 import scala.collection.immutable.Stream;
 
 import java.io.*;

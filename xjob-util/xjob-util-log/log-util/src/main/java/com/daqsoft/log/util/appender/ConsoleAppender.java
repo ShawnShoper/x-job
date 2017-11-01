@@ -5,6 +5,7 @@ import com.daqsoft.log.core.serialize.Log;
 import com.daqsoft.log.util.config.LogPattern;
 import com.daqsoft.log.util.config.LogProperties;
 import com.daqsoft.log.util.constans.Tag;
+import org.shoper.commons.core.DateUtil;
 
 import java.io.IOException;
 import java.io.PrintStream;
