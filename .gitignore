@@ -26,15 +26,11 @@
 /.settings
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
-xjob-commons/target/generated-sources/
-xjob-commons/target/maven-status/
+xjob-commons/target/
 xjob-executor/main/
-xjob-scheduler/target/classes/application.yml
-xjob-scheduler/target/classes/bootstrap.yml
+xjob-scheduler/target/
 xjob-scheduler/target/generated-sources/
 xjob-scheduler/target/maven-status/
-xjob-util/xjob-util-log/log-api/target/generated-sources/
-xjob-util/xjob-util-log/log-util/target/generated-sources/
-xjob-util/xjob-util-log/log-util/target/maven-status/
-xjob-util/xjob-util-zookeeper/target/generated-sources/
-xjob-util/xjob-util-zookeeper/target/maven-status/
+xjob-util/xjob-util-log/log-api/target
+xjob-util/xjob-util-log/log-util/target/
+xjob-util/xjob-util-zookeeper/target
