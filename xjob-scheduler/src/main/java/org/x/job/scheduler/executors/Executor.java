@@ -1,10 +1,22 @@
 package org.x.job.scheduler.executors;
 
+import org.shoper.commons.core.MD5Util;
+
+import java.util.Objects;
+
 public class Executor {
+    private String id;
     private String host;
     private int port;
     private String serviceId;
     private Status status;
+
+
+    public String getId() {
+        if (Objects.isNull(this.id))
+            this.id = MD5Util.getMD5Code("1233123");
+        return this.id;
+    }
 
     public String getHost() {
         return host;
@@ -38,9 +50,6 @@ public class Executor {
         this.status = status;
     }
 
-    public Executor() {
-    }
-
     public Executor(String host, int port, String serviceId, Status status) {
         this.host = host;
         this.port = port;
@@ -48,36 +57,31 @@ public class Executor {
         this.status = status;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Executor)) return false;
-
-        Executor executor = (Executor) o;
-
-        if (port != executor.port) return false;
-        if (!host.equals(executor.host)) return false;
-        if (!serviceId.equals(executor.serviceId)) return false;
-        return status == executor.status;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = host.hashCode();
-        result = 31 * result + port;
-        result = 31 * result + serviceId.hashCode();
-        result = 31 * result + status.hashCode();
-        return result;
+    public Executor(String host, int port, String serviceId) {
+        this(host,port,serviceId,Status.UP);
     }
 
     @Override
     public String toString() {
         return "Executor{" +
-                "host='" + host + '\'' +
-                ", port='" + port + '\'' +
+                "id='" + id + '\'' +
+                ", host='" + host + '\'' +
+                ", port=" + port +
                 ", serviceId='" + serviceId + '\'' +
                 ", status=" + status +
                 '}';
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Executor)) return false;
+        Executor executor = (Executor) o;
+        return id != null ? id.equals(executor.id) : executor.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
 }
