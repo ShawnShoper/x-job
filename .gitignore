@@ -20,7 +20,7 @@
 *.tar.gz
 *.rar
 .idea/
-/target
+*/target
 *.iml
 .project
 /.settings
