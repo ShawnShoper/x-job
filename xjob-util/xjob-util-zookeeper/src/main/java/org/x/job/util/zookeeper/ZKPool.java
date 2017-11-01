@@ -1,6 +1,9 @@
 package org.x.job.util.zookeeper;
 
 
+import org.shoper.log.util.LogFactory;
+import org.shoper.log.util.Logger;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -12,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ZKPool
 {
-	static Logger logger = LoggerFactory.getLogger(ZKPool.class);
+	static Logger logger = LogFactory.getLogger(ZKPool.class);
 	private static ConcurrentMap<String, ConcurrentMap<String, ZKClient>> zkGroups = new ConcurrentHashMap<String, ConcurrentMap<String, ZKClient>>();
 	private static final String DEFAULT = "default";
 

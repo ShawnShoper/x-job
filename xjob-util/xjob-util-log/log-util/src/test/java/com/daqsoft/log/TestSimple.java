@@ -1,9 +1,9 @@
 package com.daqsoft.log;
 
-import com.daqsoft.log.util.LogFactory;
-import com.daqsoft.log.util.Logger;
-import com.daqsoft.log.util.annotation.LogModel;
-import com.daqsoft.log.util.config.LogProperties;
+import org.shoper.log.util.LogFactory;
+import org.shoper.log.util.Logger;
+import org.shoper.log.util.annotation.LogModel;
+import org.shoper.log.util.config.LogProperties;
 
 import java.util.concurrent.TimeUnit;
 

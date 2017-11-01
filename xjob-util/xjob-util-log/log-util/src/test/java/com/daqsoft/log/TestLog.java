@@ -1,7 +1,7 @@
 package com.daqsoft.log;
 
-import com.daqsoft.log.util.LogFactory;
-import com.daqsoft.log.util.Logger;
+import org.shoper.log.util.LogFactory;
+import org.shoper.log.util.Logger;
 import org.junit.Test;
 
 import java.util.concurrent.TimeUnit;

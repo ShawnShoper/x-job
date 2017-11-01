@@ -1,12 +1,13 @@
 package org.x.job.util.zookeeper;
 
+import org.apache.zookeeper.*;
 import org.apache.zookeeper.Watcher.Event.EventType;
 import org.apache.zookeeper.Watcher.Event.KeeperState;
 import org.apache.zookeeper.ZooDefs.Ids;
 import org.apache.zookeeper.ZooKeeper.States;
 import org.apache.zookeeper.data.Stat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.shoper.log.util.LogFactory;
+import org.shoper.log.util.Logger;
 
 import java.util.List;
 import java.util.StringTokenizer;
@@ -18,7 +19,7 @@ import java.util.concurrent.*;
  * @author ShawnShoper
  */
 public class ZKClient {
-	private static final Logger logger = LoggerFactory
+	private static final Logger logger = LogFactory
 			.getLogger(ZKClient.class);
 	private final String COLON = ":";
 	private ZooKeeper zooKeeper;
@@ -105,33 +106,33 @@ public class ZKClient {
 			}
 			if (zkWatcher != null) {
 				if (KeeperState.Expired == event.getState()) {
-					if (logger.isDebugEnabled())
+					if (logger.isDebugEnable())
 						logger.debug("Watcher process session expired...");
 					status = ZKStatus.Expired;
 					zkWatcher.sessionExpired();
 				} else if (EventType.NodeChildrenChanged == event.getType()) {
-					if (logger.isDebugEnabled())
+					if (logger.isDebugEnable())
 						logger.debug(
 								"Watcher process childrenNodeChange...path is {}",
 								event.getPath()
 						);
 					zkWatcher.childrenNodeChangeProcess(event);
 				} else if (EventType.NodeCreated == event.getType()) {
-					if (logger.isDebugEnabled())
+					if (logger.isDebugEnable())
 						logger.debug(
 								"Watcher process nodeCreate...path is {}",
 								event.getPath()
 						);
 					zkWatcher.nodeCreateProcess(event);
 				} else if (EventType.NodeDataChanged == event.getType()) {
-					if (logger.isDebugEnabled())
+					if (logger.isDebugEnable())
 						logger.debug(
 								"Watcher process dataChange...path is {}",
 								event.getPath()
 						);
 					zkWatcher.dataChangeProcess(event);
 				} else if (EventType.NodeDeleted == event.getType()) {
-					if (logger.isDebugEnabled())
+					if (logger.isDebugEnable())
 						logger.debug(
 								"Watcher process nodeDelete...path is {}",
 								event.getPath()

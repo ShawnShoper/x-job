@@ -1,6 +1,6 @@
-package com.daqsoft.log.core.serialize;
+package org.shoper.log.core.serialize;
 
-import com.daqsoft.log.core.config.Constans;
+import org.shoper.log.core.config.Constans;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

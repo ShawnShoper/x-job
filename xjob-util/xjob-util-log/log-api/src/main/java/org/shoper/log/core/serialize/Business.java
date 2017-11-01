@@ -1,4 +1,4 @@
-package com.daqsoft.log.core.serialize;
+package org.shoper.log.core.serialize;
 
 import java.io.Serializable;
 

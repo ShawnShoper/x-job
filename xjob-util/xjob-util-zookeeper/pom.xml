@@ -5,16 +5,16 @@
     <parent>
         <artifactId>xjob-util</artifactId>
         <groupId>org.x.job</groupId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>xjob-util-zookeeper</artifactId>
     <dependencies>
         <dependency>
-            <groupId>com.daqsoft.log</groupId>
+            <groupId>org.x.job</groupId>
             <artifactId>log-util</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>0.0.1</version>
         </dependency>
     </dependencies>
 

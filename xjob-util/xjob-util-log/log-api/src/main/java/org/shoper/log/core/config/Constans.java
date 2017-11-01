@@ -1,4 +1,4 @@
-package com.daqsoft.log.core.config;
+package org.shoper.log.core.config;
 
 public class Constans {
     //主版本号

@@ -1,4 +1,4 @@
-package com.daqsoft.log.core.config;
+package org.shoper.log.core.config;
 
 /**
  * Created by Administrator on 2016/12/19 0019.
