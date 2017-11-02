@@ -6,16 +6,12 @@ import org.x.job.commons.job.model.JobParam;
 /**
  * 定义一个Job必须实现当前接口
  * 若非Job接口的扩展类，将在系统中不承认非实现Job接口的job.
+ * @version 1.0
  * @author Eightmonth
  */
 public interface Job {
 
     void start() throws StartupException;
-
-    default  void nextJob() throws StartupException {
-        start();
-        if(null != null) nextJob();
-    }
 
     /**
      * 强行关闭
@@ -45,4 +41,14 @@ public interface Job {
      * 拿到当前任务ID
      */
     String tid();
+
+    /**
+     * Job中的核心方法之一，
+     * 用于执行任务，参照Runnable#run()
+     * 方法内产生的所有异常需生产方自行处理，当前方法不提供事务保障。
+     * @return 返回对象提供下一步操作使用或结束。
+     */
+    default Object doJob(){
+        return null;
+    }
 }
