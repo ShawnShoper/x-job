@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Store executors.
  */
 public class ExecutorContainerHandler {
-    private static Logger LOGGER = LogFactory.getLogger(ExecutorsContainer.class);
+    private static Logger logger = LogFactory.getLogger(ExecutorsContainer.class);
 
     private static ExecutorsContainer executorsContainer = new ExecutorsContainer();
 
@@ -22,8 +22,8 @@ public class ExecutorContainerHandler {
      */
     public static void push(Executor... executors) {
         if (Objects.isNull(executors)) return;
-        if (LOGGER.isInfoEnable())
-            LOGGER.info("Received executor,size is %s", executors.length);
+        if (logger.isInfoEnable())
+            logger.info("Received executor,size is %s", executors.length);
         if (Objects.isNull(executors) || executors.length == 0) return;
         for (Executor executor : executors) {
             if (executorsContainer.containsKey(executor.getServiceId())) {

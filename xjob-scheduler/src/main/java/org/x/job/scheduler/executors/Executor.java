@@ -11,11 +11,12 @@ public class Executor {
     private String serviceId;
     private Status status;
 
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getId() {
-        if (Objects.isNull(this.id))
-            this.id = MD5Util.getMD5Code("1233123");
-        return this.id;
+        return id;
     }
 
     public String getHost() {
@@ -50,7 +51,7 @@ public class Executor {
         this.status = status;
     }
 
-    public Executor(String host, int port, String serviceId, Status status) {
+    public Executor(String id,String host, int port, String serviceId, Status status) {
         this.host = host;
         this.port = port;
         this.serviceId = serviceId;
@@ -58,7 +59,7 @@ public class Executor {
     }
 
     public Executor(String host, int port, String serviceId) {
-        this(host,port,serviceId,Status.UP);
+        this(null,host,port,serviceId,Status.UP);
     }
 
     @Override

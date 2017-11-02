@@ -20,15 +20,9 @@ import java.util.stream.Collectors;
 public class ExecutorsDiscover {
     @Autowired
     DiscoveryClient discoveryClient;
-    ZKClient zkClient;
-    @Value("${spring.cloud.zookeeper.discovery.instance-host}")
-    private String zkHost;
-    @Value("${spring.cloud.zookeeper.discovery.instance-port}")
-    public int zkPort;
 
     @PostConstruct
     public void init() {
-        zkClient = ZKPool.creatZkClient(this.getClass().getName(),zkHost,zkPort,5000,new ZKWatcher());
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
@@ -43,7 +37,7 @@ public class ExecutorsDiscover {
         Map<String, List<Executor>> serviceInstanceMap = new HashMap<>();
         services.stream().forEach(e -> {
             List<Executor> collect = discoveryClient.getInstances(e).stream()
-                    .map(a -> new Executor(a.getHost(), a.getPort(), a.getServiceId(), Status.UP)).collect(Collectors.toList());
+                    .map(a -> new Executor(a.getServiceId(), a.getHost(), a.getPort(), e, Status.UP)).collect(Collectors.toList());
             serviceInstanceMap.put(e, collect);
         });
         ExecutorContainerHandler.push(serviceInstanceMap);
