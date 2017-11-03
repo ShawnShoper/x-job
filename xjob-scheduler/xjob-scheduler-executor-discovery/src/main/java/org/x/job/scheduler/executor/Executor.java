@@ -1,8 +1,6 @@
-package org.x.job.scheduler.executors;
+package org.x.job.scheduler.executor;
 
-import org.shoper.commons.core.MD5Util;
-
-import java.util.Objects;
+import org.x.job.scheduler.executor.discovery.Status;
 
 public class Executor {
     private String id;

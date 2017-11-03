@@ -4,17 +4,28 @@ import org.apache.zookeeper.WatchedEvent;
 
 /**
  * Empty abstract zookeeper watcher...Subclass inherit and need method to implement..
- * @author ShawnShoper
  *
+ * @author ShawnShoper
  */
-public class ZKWatcher{
-	
-	public void sessionExpired(){};
-	public void childrenNodeChangeProcess(WatchedEvent event){};
+public class ZKWatcher {
 
-	public void dataChangeProcess(WatchedEvent event){};
+    public void sessionExpired() throws Exception {
+    }
 
-	public void nodeDeleteProcess(WatchedEvent event){};
 
-	public void nodeCreateProcess(WatchedEvent event){};
+    public void childrenNodeChangeProcess(WatchedEvent event) throws Exception {
+    }
+
+
+    public void dataChangeProcess(WatchedEvent event) throws Exception {
+    }
+
+
+    public void nodeDeleteProcess(WatchedEvent event) throws Exception {
+    }
+
+
+    public void nodeCreateProcess(WatchedEvent event) throws Exception {
+    }
+
 }

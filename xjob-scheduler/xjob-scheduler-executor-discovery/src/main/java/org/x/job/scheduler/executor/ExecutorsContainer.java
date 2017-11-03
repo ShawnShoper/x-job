@@ -1,6 +1,4 @@
-package org.x.job.scheduler;
-
-import org.x.job.scheduler.executors.Executor;
+package org.x.job.scheduler.executor;
 
 import java.util.HashMap;
 import java.util.List;

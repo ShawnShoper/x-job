@@ -1,12 +1,9 @@
-package org.x.job.scheduler.executors;
+package org.x.job.scheduler.executor.discovery;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Component;
-import org.x.job.util.zookeeper.ZKClient;
-import org.x.job.util.zookeeper.ZKPool;
-import org.x.job.util.zookeeper.ZKWatcher;
+import org.x.job.scheduler.executor.Executor;
 
 import javax.annotation.PostConstruct;
 import java.util.*;

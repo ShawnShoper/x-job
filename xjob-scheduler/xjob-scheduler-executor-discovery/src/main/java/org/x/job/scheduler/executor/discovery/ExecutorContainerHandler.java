@@ -1,8 +1,9 @@
-package org.x.job.scheduler.executors;
+package org.x.job.scheduler.executor.discovery;
 
 import org.shoper.log.util.LogFactory;
 import org.shoper.log.util.Logger;
-import org.x.job.scheduler.ExecutorsContainer;
+import org.x.job.scheduler.executor.Executor;
+import org.x.job.scheduler.executor.ExecutorsContainer;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,4 +1,4 @@
-package org.x.job.scheduler.registry;
+package org.x.job.scheduler.core.registry;
 
 import org.shoper.commons.core.MD5Util;
 

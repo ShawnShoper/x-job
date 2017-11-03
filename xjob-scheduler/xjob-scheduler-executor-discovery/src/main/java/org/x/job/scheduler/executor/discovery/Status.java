@@ -1,4 +1,4 @@
-package org.x.job.scheduler.executors;
+package org.x.job.scheduler.executor.discovery;
 
 /**
  * Executor's status
