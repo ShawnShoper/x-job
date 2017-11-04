@@ -18,6 +18,11 @@
             <artifactId>xjob-commons</artifactId>
             <version>0.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.x.job</groupId>
+            <artifactId>xjob-util</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
 </project>
