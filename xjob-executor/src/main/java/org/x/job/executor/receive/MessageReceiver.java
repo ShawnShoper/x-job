@@ -1,40 +1,32 @@
 package org.x.job.executor.receive;
 
-import javafx.concurrent.Task;
-import org.x.job.commons.job.Job;
-import org.x.job.executor.receive.enums.MessageEnum;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import org.springframework.stereotype.Component;
+import org.x.job.commons.transfer.Fenshou;
 
 /**
  * 从调度器接收信息并解析
+ * @author  Eightmonth
  */
+@Component
 public class MessageReceiver {
+
     /**
-     * 以messageEnum里面的值作为区别map里面的信息
-     * @see MessageEnum
-     * @param kav
-     * @return
-     * @throws Exception
+     * 从执行器或调度器接收任务参数
+     * @param fenShou 接收参数封装对象
+     * @return 返回是否接收成功，true:成功， false：失败
+     * @throws Exception 如果接收失败，反馈接收失败异常
      */
-    public Boolean doReceive(Map<String, Object> kav) throws Exception {
-
-        List<Job> jobs = new ArrayList<>();
-        List<String> machines = new ArrayList<>();
-
-        for(Map.Entry<String, Object> map : kav.entrySet()){
-            if(map.getKey().equals(MessageEnum.JOB)){
-                jobs.add((Job)map.getValue());
-            }
-            if(map.getKey().equals(MessageEnum.MACHINE)){
-                machines.add(map.getValue().toString());
-            }
+    public Boolean doReceive(Fenshou fenShou) throws Exception {
+        Boolean flag = false;
+        try{
+            TaskHandler.getJobs().set(fenShou.getJobs());
+            TaskHandler.getMachines().set(fenShou.getMachines());
+            TaskHandler.getOthers().set(fenShou.getOthers());
+            flag = true;
+        }catch (Exception e){
+            throw new Exception(e);
+        }finally {
+            return flag;
         }
-
-        TaskHandler.getJobs().set(jobs);
-        TaskHandler.getMachines().set(machines);
-        return true;
     }
 }

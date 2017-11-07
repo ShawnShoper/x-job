@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class Fenshou {
     private List<String> machines;
-    private List<Job> jobs;
+    private List<String> jobs;
     private Map<String, Object> others;
 
     public List<String> getMachines() {
@@ -23,11 +23,11 @@ public class Fenshou {
         this.machines = machines;
     }
 
-    public List<Job> getJobs() {
+    public List<String> getJobs() {
         return jobs;
     }
 
-    public void setJobs(List<Job> jobs) {
+    public void setJobs(List<String> jobs) {
         this.jobs = jobs;
     }
 
