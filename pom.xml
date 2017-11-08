@@ -11,7 +11,6 @@
         <module>xjob-scheduler</module>
         <module>xjob-commons</module>
         <module>xjob-util</module>
-        <module>xjob-conf</module>
     </modules>
     <packaging>pom</packaging>
     <name>x-job</name>
