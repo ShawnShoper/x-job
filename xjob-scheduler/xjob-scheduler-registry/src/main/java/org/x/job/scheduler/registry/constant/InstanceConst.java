@@ -1,9 +1,12 @@
 package org.x.job.scheduler.registry.constant;
 
 /**
- * Executors Instance constant field...
+ * Schedule constant field
  */
 public class InstanceConst {
-    public static final String SCHEDULE_INFO_NODE = "/schedule/info";
+    //register master node
+    public static final String SCHEDULE_MASTER_NODE = "/schedule/master";
+    //register slaver node
+    public static final String SCHEDULE_SLAVER_NODE = "/schedule/slaver";
 
 }

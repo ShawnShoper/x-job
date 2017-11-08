@@ -45,6 +45,7 @@ public class ExecutorRegistry {
 
     /**
      * Registry executor info to registry center
+     *
      * @param executors
      * @throws InterruptedException
      */
@@ -53,9 +54,9 @@ public class ExecutorRegistry {
         try {
             String serviceInfo = objectMapper.writeValueAsString(executors);
             boolean node = zkClient.createNode(EXECUTOR_INFO_NODE, serviceInfo, CreateMode.EPHEMERAL);
-            if(node) {
+            if (node) {
                 if (logger.isInfoEnable())
-                    logger.info("Create node '%s'",EXECUTOR_INFO_NODE);
+                    logger.info("Create node '%s'", EXECUTOR_INFO_NODE);
             }
         } catch (JsonProcessingException e) {
             logger.error("Executors to json failed..", e);
@@ -67,6 +68,7 @@ public class ExecutorRegistry {
 
     /**
      * 初始化zookeeper connection
+     *
      * @throws InterruptedException
      */
     private void initZK() throws InterruptedException {
@@ -83,8 +85,8 @@ public class ExecutorRegistry {
     class ExecutorZKWatch extends ZKWatcher {
         @Override
         public void sessionExpired() throws Exception {
-            if(logger.isDebugEnable())
-            logger.debug("Zookeeper connection session expired.");
+            if (logger.isDebugEnable())
+                logger.debug("Zookeeper connection session expired.");
             super.sessionExpired();
             zkClient.close();
             zkClient = null;

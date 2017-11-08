@@ -1,0 +1,14 @@
+server:
+  port: 8080
+org:
+  x:
+    job:
+      schedule:
+        host: 192.168.2.56
+        port: ${server.port}
+spring:
+  cloud:
+    zookeeper:
+      discovery:
+        instance-port: 2181
+        instance-host: 192.168.2.115
