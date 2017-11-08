@@ -88,7 +88,7 @@ public class ConsoleAppender extends Appender {
                         String[] split = tmp.split("\\.");
                         StringBuilder stringBuilder = new StringBuilder();
                         for (int i = 0; i < split.length - 1; i++)
-                            stringBuilder.append(split[i].charAt(1) + ".");
+                            stringBuilder.append(split[i].charAt(0) + ".");
                         tmp = stringBuilder.toString() + split[split.length - 1];
 //                        tmp = tmp.substring(0, tmp.length() + Math.abs(tag.getOffset()) - tmp.length());
                     }
