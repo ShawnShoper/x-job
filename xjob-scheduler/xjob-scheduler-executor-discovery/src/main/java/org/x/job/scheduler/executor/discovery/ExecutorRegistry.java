@@ -33,7 +33,9 @@ public class ExecutorRegistry {
     @Value("${spring.cloud.zookeeper.discovery.instance-port}")
     public int zkPort;
     ZKClient zkClient;
-
+    /**
+     * Put on  a reentrance
+     */
     ReentrantLock reentrantLock = new ReentrantLock(true);
 
     public void registry() throws InterruptedException {
@@ -42,6 +44,11 @@ public class ExecutorRegistry {
 
     ObjectMapper objectMapper = new ObjectMapper();
 
+    /**
+     * Registry executor info to registry center
+     * @param executors
+     * @throws InterruptedException
+     */
     public void registryExecutorInfo(Map<String, List<Executor>> executors) throws InterruptedException {
         reentrantLock.lockInterruptibly();
         try {
@@ -50,7 +57,6 @@ public class ExecutorRegistry {
             if(node) {
                 if (logger.isInfoEnable())
                     logger.info("Create node '%s'",EXECUTORINFO_NODE);
-
             }
         } catch (JsonProcessingException e) {
             logger.error("Executors to json failed..", e);
@@ -60,6 +66,10 @@ public class ExecutorRegistry {
         reentrantLock.unlock();
     }
 
+    /**
+     * 初始化zookeeper connection
+     * @throws InterruptedException
+     */
     private void initZK() throws InterruptedException {
         reentrantLock.lockInterruptibly();
         try {
@@ -75,34 +85,12 @@ public class ExecutorRegistry {
     class ExecutorZKWatch extends ZKWatcher {
         @Override
         public void sessionExpired() throws Exception {
+            if(logger.isDebugEnable())
             logger.debug("Zookeeper connection session expired.");
             super.sessionExpired();
             zkClient.close();
             zkClient = null;
             ExecutorRegistry.this.initZK();
-
-        }
-
-        @Override
-        public void childrenNodeChangeProcess(WatchedEvent event) throws Exception {
-
-            super.childrenNodeChangeProcess(event);
-
-        }
-
-        @Override
-        public void dataChangeProcess(WatchedEvent event) throws Exception {
-            super.dataChangeProcess(event);
-        }
-
-        @Override
-        public void nodeDeleteProcess(WatchedEvent event) throws Exception {
-            super.nodeDeleteProcess(event);
-        }
-
-        @Override
-        public void nodeCreateProcess(WatchedEvent event) throws Exception {
-            super.nodeCreateProcess(event);
         }
     }
 }
