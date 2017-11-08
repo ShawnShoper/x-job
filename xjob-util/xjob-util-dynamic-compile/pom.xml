@@ -8,7 +8,17 @@
         <version>0.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-
     <artifactId>xjob-util-dynamic-compile</artifactId>
     <packaging>pom</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.x.job</groupId>
+            <artifactId>log-util</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.shoper.commons</groupId>
+            <artifactId>commons-core</artifactId>
+        </dependency>
+    </dependencies>
 </project>

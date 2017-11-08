@@ -1,13 +1,7 @@
-package org.shoper.dynamiccompile;
+package org.x.job.dynamiccompile;
 
-import com.sun.tools.javac.Main;
-import org.apache.commons.io.FileUtils;
-import org.shoper.dynamiccompile.info.ClassInfo;
-import org.shoper.commons.MD5Util;
-import org.shoper.commons.StringUtil;
-import org.shoper.commons.VolatileObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.shoper.log.util.LogFactory;
+import org.shoper.log.util.Logger;
 import sun.misc.ClassLoaderUtil;
 
 import java.io.*;
@@ -29,7 +23,7 @@ import java.util.zip.ZipEntry;
  * @author CathyZhuzhu
  */
 public class ClassLoaderHandler {
-    private static Logger logger = LoggerFactory
+    private static Logger logger = LogFactory
             .getLogger(ClassLoaderHandler.class);
     private VolatileObject<URLClassLoader> classLoader;
     private ClassInfo classInfo;
