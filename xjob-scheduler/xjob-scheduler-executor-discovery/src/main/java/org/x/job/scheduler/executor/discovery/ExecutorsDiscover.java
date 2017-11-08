@@ -24,12 +24,12 @@ public class ExecutorsDiscover {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                fetchExecutorInstance();
+                fetchExecutorInstances();
             }
         }, 5000L);
     }
 
-    private void fetchExecutorInstance() {
+    private void fetchExecutorInstances() {
         List<String> services = discoveryClient.getServices();
         Map<String, List<Executor>> serviceInstanceMap = new HashMap<>();
         services.stream().forEach(e -> {

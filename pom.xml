@@ -33,6 +33,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>org.shoper.commons</groupId>
+                <artifactId>commons-dependencies</artifactId>
+                <version>0.0.1</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <properties>
