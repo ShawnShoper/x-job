@@ -9,13 +9,6 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>xjob-util</artifactId>
+    <artifactId>xjob-util-dynamic-compile</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>xjob-util-zookeeper</module>
-        <module>xjob-util-log</module>
-        <module>xjob-util-dynamic-compile</module>
-    </modules>
-
-
 </project>

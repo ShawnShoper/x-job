@@ -11,6 +11,7 @@
         <module>xjob-scheduler</module>
         <module>xjob-commons</module>
         <module>xjob-util</module>
+        <module>xjob-conf</module>
     </modules>
     <packaging>pom</packaging>
     <name>x-job</name>
@@ -83,8 +84,12 @@
         <developer>
             <email>xiehao3692@vip.qq.com</email>
             <name>Shawn Shoper</name>
-            <id>ss</id>
+            <id>ShawnShoper</id>
         </developer>
-
+        <developer>
+            <id>EightMonth</id>
+            <name>Eightmonth</name>
+            <email>eightmonth@qq.com</email>
+        </developer>
     </developers>
 </project>
