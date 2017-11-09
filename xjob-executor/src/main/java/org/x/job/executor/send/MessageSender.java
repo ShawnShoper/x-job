@@ -1,6 +1,9 @@
 package org.x.job.executor.send;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.x.job.commons.transfer.Fenshou;
 import org.x.job.executor.receive.MessageReceiver;
 
@@ -10,7 +13,6 @@ import org.x.job.executor.receive.MessageReceiver;
  */
 public class MessageSender {
 
-    @Autowired
     private MessageReceiver messageReceiver;
 
     /**
