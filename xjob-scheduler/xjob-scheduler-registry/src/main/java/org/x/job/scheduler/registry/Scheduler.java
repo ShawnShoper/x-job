@@ -4,7 +4,6 @@ package org.x.job.scheduler.registry;
 import org.shoper.commons.core.MD5Util;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
-import org.x.job.scheduler.registry.constant.Duty;
 
 import java.util.Objects;
 @ConfigurationProperties(prefix = "org.x.job.schedule")

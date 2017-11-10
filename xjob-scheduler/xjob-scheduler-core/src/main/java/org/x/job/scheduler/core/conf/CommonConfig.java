@@ -5,13 +5,15 @@ import org.shoper.log.util.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import javax.annotation.PreDestroy;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadFactory;
 
 @Configuration
 public class CommonConfig {
     private static Logger logger = LogFactory.getLogger(CommonConfig.class);
-    @Value("")
     @Bean
     public ExecutorService executorService(){
         return Executors.newCachedThreadPool(r -> {
@@ -20,5 +22,9 @@ public class CommonConfig {
                 logger.debug("Supply a new Thread.Thread id-%s Thread name-%s, Thread priority-%s, Thread is daemon-%s, Thread group-%s",thread.getId(),thread.getName(),thread.getPriority(),thread.isDaemon(),thread.getThreadGroup());
             return thread;
         });
+    }
+    @PreDestroy
+    public void destory(ExecutorService executorService){
+        executorService.shutdownNow();
     }
 }

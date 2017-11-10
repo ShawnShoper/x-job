@@ -6,10 +6,9 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.shoper.log.util.LogFactory;
 import org.shoper.log.util.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.shoper.log.util.annotation.LogModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.x.job.commons.bean.ZookeeperInfo;
 import org.x.job.util.zookeeper.ZKClient;
 import org.x.job.util.zookeeper.ZKPool;
 import org.x.job.util.zookeeper.ZKWatcher;
@@ -17,38 +16,26 @@ import org.x.job.util.zookeeper.ZKWatcher;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static org.x.job.scheduler.registry.constant.InstanceConst.SCHEDULE_MASTER_NODE;
+import static org.x.job.scheduler.registry.constant.InstanceConst.SCHEDULE_SLAVER_NODE;
 
 @Component
-public class ScheduleRegistry extends ZKModule{
+@LogModel("Schedule registry")
+public class SchedulePreempt {
     private static Logger logger = LogFactory.getLogger(SchedulePreempt.class);
-    @Autowired
-    ZookeeperInfo zookeeperInfo;
-
-    @Override
-    public int start() {
-        setZkInfo(zookeeperInfo);
-        return super.start();
-    }
-
-    @Override
-    public void stop() {
-        super.stop();
-    }
-
     @Value("${spring.cloud.zookeeper.discovery.instance-host}")
     private String zkHost;
     @Value("${spring.cloud.zookeeper.discovery.instance-port}")
     public int zkPort;
     ZKClient zkClient;
     /**
-     * Reentrance lock
+     * Put on  a reentrance
      */
     ReentrantLock reentrantLock = new ReentrantLock(true);
 
     public void connect() throws InterruptedException {
         reentrantLock.lockInterruptibly();
         try {
-            zkClient = ZKPool.creatZkClient(this.getClass().getName(), zkHost, zkPort, 5000, new ScheudleRegistryZKWatcher());
+            zkClient = ZKPool.creatZkClient(this.getClass().getName(), zkHost, zkPort, 5000, new ScheudleZKWatcher());
         } finally {
             reentrantLock.unlock();
         }
@@ -61,22 +48,33 @@ public class ScheduleRegistry extends ZKModule{
 
     ObjectMapper objectMapper = new ObjectMapper();
 
-    public void registryExecutorInfo(Scheduler scheduled) throws InterruptedException {
+    /**
+     * Registry schedule master info to registry center
+     *
+     * @throws InterruptedException
+     */
+    public boolean registryMasterExecutorInfo(Scheduler scheduled) throws InterruptedException {
+        boolean isMaster = false;
         reentrantLock.lockInterruptibly();
         try {
-            zkClient.createNode(SCHEDULE_MASTER_NODE + "/" + scheduled.getId(), objectMapper.writeValueAsString(scheduled), CreateMode.EPHEMERAL);
+            isMaster = zkClient.createNode(SCHEDULE_MASTER_NODE, objectMapper.writeValueAsString(scheduled), CreateMode.EPHEMERAL);
+            if (isMaster) {
+                if (logger.isInfoEnable())
+                    logger.info("Create node '%s'", SCHEDULE_SLAVER_NODE);
+            }
         } catch (KeeperException e) {
             logger.error("zookeeper create %s failed...", e.getPath(), e);
         } catch (JsonProcessingException e) {
             logger.error("Schedule to json failed..", e);
         }
         reentrantLock.unlock();
+        return isMaster;
     }
 
     /**
      * Schedule watcher to monitor zookeeper node.
      */
-    class ScheudleRegistryZKWatcher extends ZKWatcher {
+    class ScheudleZKWatcher extends ZKWatcher {
         @Override
         public void sessionExpired() throws Exception {
             reentrantLock.lockInterruptibly();
