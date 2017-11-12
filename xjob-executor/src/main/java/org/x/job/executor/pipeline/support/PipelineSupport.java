@@ -14,6 +14,15 @@ import java.util.*;
  */
 public class PipelineSupport {
 
+    public static Section jobToSection(List<String> jobUUIDs) throws Exception {
+        return fixSection(fixJob(jobUUIDs));
+    }
+
+    public static List<Job> fixJob(List<String> jobUUIDs) throws Exception {
+        // 这里待处理，把JobUUIDs转成job集合，先做个伪代码
+        return new ArrayList<>();
+    }
+
     public static Section fixSection(List<Job> jobList){
         Collections.reverse(jobList);
         return push(null, jobList, 0);

@@ -1,7 +1,5 @@
 package org.x.job.commons.transfer;
 
-import org.x.job.commons.job.Job;
-
 import java.util.List;
 import java.util.Map;
 
@@ -12,8 +10,18 @@ import java.util.Map;
  */
 public class Fenshou {
     private List<String> machines;
-    private List<String> jobs;
+
+    private List<List<String>> jobs;
+
     private Map<String, Object> others;
+
+    public List<List<String>> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<List<String>> jobs) {
+        this.jobs = jobs;
+    }
 
     public List<String> getMachines() {
         return machines;
@@ -23,13 +31,6 @@ public class Fenshou {
         this.machines = machines;
     }
 
-    public List<String> getJobs() {
-        return jobs;
-    }
-
-    public void setJobs(List<String> jobs) {
-        this.jobs = jobs;
-    }
 
     public Map<String, Object> getOthers() {
         return others;

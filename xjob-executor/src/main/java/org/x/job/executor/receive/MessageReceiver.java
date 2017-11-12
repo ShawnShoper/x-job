@@ -1,5 +1,6 @@
 package org.x.job.executor.receive;
 
+import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.x.job.commons.transfer.Fenshou;
 
@@ -7,7 +8,7 @@ import org.x.job.commons.transfer.Fenshou;
  * 从调度器接收信息并解析
  * @author  Eightmonth
  */
-@Component
+@FeignClient("appilcation-name")// 这里待配置
 public class MessageReceiver {
 
     /**
@@ -19,7 +20,7 @@ public class MessageReceiver {
     public Boolean doReceive(Fenshou fenShou) throws Exception {
         Boolean flag = false;
         try{
-            TaskHandler.getJobs().set(fenShou.getJobs());
+            TaskHandler.getMasterJobs().set(fenShou.getJobs());
             TaskHandler.getMachines().set(fenShou.getMachines());
             TaskHandler.getOthers().set(fenShou.getOthers());
             flag = true;

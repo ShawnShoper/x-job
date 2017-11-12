@@ -1,5 +1,7 @@
 package org.x.job.executor.pipeline;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Objects;
 
 /**
@@ -10,6 +12,7 @@ import java.util.Objects;
  *
  * @author Eightmonth
  */
+@Component
 public class Pipeline {
 
     public void doTask(Section sct){
