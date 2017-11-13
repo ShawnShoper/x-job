@@ -11,16 +11,27 @@ import java.util.Map;
 public class Fenshou {
     private List<String> machines;
 
-    private List<List<String>> jobs;
+    private List<String> job;
 
     private Map<String, Object> others;
 
-    public List<List<String>> getJobs() {
-        return jobs;
+    public Fenshou(){}
+
+    public Fenshou(List<String> job) {
+        this.job = job;
     }
 
-    public void setJobs(List<List<String>> jobs) {
-        this.jobs = jobs;
+    public Fenshou(List<String> job, Map<String, Object> others) {
+        this.job = job;
+        this.others = others;
+    }
+
+    public void setJob(List<String> job) {
+        this.job = job;
+    }
+
+    public List<String> getJob() {
+        return job;
     }
 
     public List<String> getMachines() {

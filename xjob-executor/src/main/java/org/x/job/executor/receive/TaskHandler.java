@@ -11,9 +11,7 @@ public class TaskHandler {
 
     private static ThreadLocal<List<String>> machines = new ThreadLocal<>(); //all machines
 
-    private static ThreadLocal<List<List<String>>> masterJobs = new ThreadLocal<>(); // master undestribute
-
-    private static ThreadLocal<List<String>> slaveJobs = new ThreadLocal<>(); // master destribute to slave
+    private static ThreadLocal<List<String>> job = new ThreadLocal<>(); // jobID
 
     private static ThreadLocal<Map<String, Object>> others = new ThreadLocal<>(); // all others
 
@@ -33,19 +31,11 @@ public class TaskHandler {
         TaskHandler.machines = machines;
     }
 
-    public static ThreadLocal<List<List<String>>> getMasterJobs() {
-        return masterJobs;
+    public static ThreadLocal<List<String>> getJob() {
+        return job;
     }
 
-    public static void setMasterJobs(ThreadLocal<List<List<String>>> masterJobs) {
-        TaskHandler.masterJobs = masterJobs;
-    }
-
-    public static ThreadLocal<List<String>> getSlaveJobs() {
-        return slaveJobs;
-    }
-
-    public static void setSlaveJobs(ThreadLocal<List<String>> slaveJobs) {
-        TaskHandler.slaveJobs = slaveJobs;
+    public static void setJob(ThreadLocal<List<String>> job) {
+        TaskHandler.job = job;
     }
 }

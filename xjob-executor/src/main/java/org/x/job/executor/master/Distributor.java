@@ -4,8 +4,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.x.job.commons.job.Job;
+import org.x.job.commons.transfer.Fenshou;
 import org.x.job.executor.pipeline.PipelineExecutor;
+import org.x.job.executor.pipeline.support.PipelineSupport;
 import org.x.job.executor.receive.TaskHandler;
+import org.x.job.executor.send.MessageSender;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,19 +23,21 @@ public class Distributor {
     @Autowired
     private PipelineExecutor pipelineExecutor;
 
+    @Autowired
+    private MessageSender messageSender;
+
     public void doDistribute() throws Exception {
 
         if(LOGGER.isInfoEnabled())
             LOGGER.info(">>>>>>>>> Task action <<<<<<<<");
         List<String> machines = TaskHandler.getMachines().get();
-        List<List<String>> firstUUIDs = TaskHandler.getMasterJobs().get();
-        List<List<Job>> allJobs = new ArrayList<>();
+        List<String> jobs = TaskHandler.getJob().get();
 
         if(LOGGER.isInfoEnabled())
             LOGGER.info(">>>>>>>>> Task getting <<<<<<<<");
 
-        for(List<String> secondUUIDs : firstUUIDs){
-            allJobs.add(getJobByUUID(secondUUIDs));
+        for (String addr : machines){
+            messageSender.doSend(addr, new Fenshou(jobs));
         }
 
         if(LOGGER.isInfoEnabled())
@@ -49,7 +54,7 @@ public class Distributor {
             LOGGER.info(">>>>>>>>> Task end <<<<<<<<");
     }
 
-    public List<Job> getJobByUUID(List<String> uuid) throws Exception {
+    public Job getJobByUUID(String uuid) throws Exception {
         // 根据UUID从第三方存储得到job的文件，进行编译并得到Job对象。
         return null;
     }

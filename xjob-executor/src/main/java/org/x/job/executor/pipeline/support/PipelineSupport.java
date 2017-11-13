@@ -34,22 +34,4 @@ public class PipelineSupport {
         Section s = new Section(sct, jobs.get(i));
         return push(s, jobs, ++i);
     }
-
-    public static void main(String[] args) {
-        List<Job> jobs = new ArrayList<>();
-        Job job1 = new DemoJob(1);
-        Job job2 = new DemoJob(2);
-        Job job3 = new DemoJob(3);
-        Job job4 = new DemoJob(4);
-        Job job5 = new DemoJob(5);
-
-        jobs.add(job1);
-        jobs.add(job2);
-        jobs.add(job3);
-        jobs.add(job4);
-        jobs.add(job5);
-
-        Pipeline pipeline = new Pipeline();
-        pipeline.doTask(fixSection(jobs));
-    }
 }
