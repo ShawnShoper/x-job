@@ -4,6 +4,8 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
 import org.x.job.commons.transfer.Fenshou;
 
+import java.util.Objects;
+
 /**
  * 从调度器接收信息并解析
  * @author  Eightmonth
@@ -20,12 +22,16 @@ public class MessageReceiver {
     public Boolean doReceive(Fenshou fenShou) throws Exception {
         Boolean flag = false;
         try{
-            TaskHandler.getMasterJobs().set(fenShou.getJobs());
-            TaskHandler.getMachines().set(fenShou.getMachines());
-            TaskHandler.getOthers().set(fenShou.getOthers());
+            // 不允许没有任务
+            if(Objects.isNull(fenShou.getJob()))
+                return false;
+
+            TaskHandler.getJob().set(fenShou.getJob());
+            if(!Objects.isNull(fenShou.getMachines()))
+                TaskHandler.getMachines().set(fenShou.getMachines());
+            if(!Objects.isNull(fenShou.getOthers()))
+                TaskHandler.getOthers().set(fenShou.getOthers());
             flag = true;
-        }catch (Exception e){
-            throw new Exception(e);
         }finally {
             return flag;
         }

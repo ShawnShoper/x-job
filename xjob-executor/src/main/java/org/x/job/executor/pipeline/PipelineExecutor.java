@@ -50,7 +50,7 @@ public class PipelineExecutor {
     public void doIt() throws Exception {
         try {
             pre();
-            pipeline.doTask(PipelineSupport.jobToSection(TaskHandler.getSlaveJobs().get()));
+            pipeline.doTask(PipelineSupport.jobToSection(TaskHandler.getJob().get()));
             post();
         } catch (Exception e){
             exception(e);
