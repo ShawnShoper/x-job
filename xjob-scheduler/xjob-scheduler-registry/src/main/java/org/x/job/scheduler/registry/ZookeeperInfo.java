@@ -1,4 +1,4 @@
-package org.x.job.commons.bean;
+package org.x.job.scheduler.registry;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.stereotype.Component;
 import org.x.job.scheduler.registry.constant.Duty;
+import org.x.job.scheduler.registry.strategy.ClusterMasterSelect;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.ExecutorService;
@@ -12,7 +13,7 @@ import java.util.concurrent.ExecutorService;
 @EnableConfigurationProperties(Scheduler.class)
 public class ScheduleSafeguard {
     @Autowired
-    SchedulePreempt schedulePreempt;
+    ClusterMasterSelect clusterMasterSelect;
     @Autowired
     Scheduler scheduler;
     private Duty duty;
@@ -26,16 +27,16 @@ public class ScheduleSafeguard {
 
     /**
      * Preempt for master ...
+     *
      * @throws InterruptedException
      */
     public void preemptForMaster() throws InterruptedException {
-        schedulePreempt.connect();
-        if (!schedulePreempt.registryMasterExecutorInfo(scheduler)) {
-            schedulePreempt.disconnect();
+        if (!clusterMasterSelect.selectMaster()) {
             duty = Duty.SLAVER;
         } else
             duty = Duty.MASTER;
-        if(duty.equals(Duty.MASTER)){
+        //TODO
+        if (duty.equals(Duty.MASTER)) {
 
         }
     }

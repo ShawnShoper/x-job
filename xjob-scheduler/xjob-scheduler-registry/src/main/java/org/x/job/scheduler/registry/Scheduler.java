@@ -39,5 +39,4 @@ public class Scheduler {
                 this.id = MD5Util.getMD5Code(this.getClass().getName()+host + port);
         return id;
     }
-
 }

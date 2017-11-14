@@ -9,7 +9,6 @@ import org.shoper.log.util.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import org.x.job.commons.bean.ZookeeperInfo;
 import org.x.job.util.zookeeper.ZKClient;
 import org.x.job.util.zookeeper.ZKPool;
 import org.x.job.util.zookeeper.ZKWatcher;
@@ -20,7 +19,7 @@ import static org.x.job.scheduler.registry.constant.InstanceConst.SCHEDULE_MASTE
 
 @Component
 public class ScheduleRegistry extends ZKModule{
-    private static Logger logger = LogFactory.getLogger(SchedulePreempt.class);
+    private static Logger logger = LogFactory.getLogger(ScheduleRegistry.class);
     @Autowired
     ZookeeperInfo zookeeperInfo;
 

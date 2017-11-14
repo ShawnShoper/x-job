@@ -1,4 +1,4 @@
-package org.x.job.scheduler.registry;
+package org.x.job.scheduler.registry.strategy;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +9,8 @@ import org.shoper.log.util.Logger;
 import org.shoper.log.util.annotation.LogModel;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.x.job.scheduler.registry.Scheduler;
+import org.x.job.scheduler.registry.ZookeeperInfo;
 import org.x.job.util.zookeeper.ZKClient;
 import org.x.job.util.zookeeper.ZKPool;
 import org.x.job.util.zookeeper.ZKWatcher;
@@ -17,15 +19,12 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import static org.x.job.scheduler.registry.constant.InstanceConst.SCHEDULE_MASTER_NODE;
 import static org.x.job.scheduler.registry.constant.InstanceConst.SCHEDULE_SLAVER_NODE;
-
-@Component
-@LogModel("Schedule registry")
-public class SchedulePreempt {
-    private static Logger logger = LogFactory.getLogger(SchedulePreempt.class);
-    @Value("${spring.cloud.zookeeper.discovery.instance-host}")
-    private String zkHost;
-    @Value("${spring.cloud.zookeeper.discovery.instance-port}")
-    public int zkPort;
+/**
+ * 抢占式夺取master
+ */
+public class GrabAlgorithmSelect implements ClusterMasterSelect{
+    private static Logger logger = LogFactory.getLogger(org.x.job.scheduler.registry.strategy.GrabAlgorithmSelect.class);
+    private ZookeeperInfo zookeeperInfo;
     ZKClient zkClient;
     /**
      * Put on  a reentrance
@@ -35,7 +34,7 @@ public class SchedulePreempt {
     public void connect() throws InterruptedException {
         reentrantLock.lockInterruptibly();
         try {
-            zkClient = ZKPool.creatZkClient(this.getClass().getName(), zkHost, zkPort, 5000, new ScheudleZKWatcher());
+            zkClient = ZKPool.creatZkClient(this.getClass().getName(), zookeeperInfo.getHost(), zookeeperInfo.getPort(), 5000, new ScheudleZKWatcher());
         } finally {
             reentrantLock.unlock();
         }
@@ -69,6 +68,11 @@ public class SchedulePreempt {
         }
         reentrantLock.unlock();
         return isMaster;
+    }
+
+    @Override
+    public boolean selectMaster() {
+        return false;
     }
 
     /**

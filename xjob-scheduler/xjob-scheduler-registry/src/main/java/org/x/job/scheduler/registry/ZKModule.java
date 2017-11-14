@@ -1,11 +1,12 @@
 package org.x.job.scheduler.registry;
 
 import org.apache.zookeeper.WatchedEvent;
-import org.x.job.commons.bean.ZookeeperInfo;
 import org.x.job.util.zookeeper.ZKClient;
 import org.x.job.util.zookeeper.ZKWatcher;
 
 public abstract class ZKModule extends StartableModule {
+
+
     /**
      * reconnect zookeeper
      */
