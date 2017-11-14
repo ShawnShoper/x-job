@@ -23,8 +23,8 @@ public class CommonConfig {
             return thread;
         });
     }
-    @PreDestroy
-    public void destory(ExecutorService executorService){
-        executorService.shutdownNow();
-    }
+//    @PreDestroy
+//    public void destory(){
+//        executorService.shutdownNow();
+//    }
 }

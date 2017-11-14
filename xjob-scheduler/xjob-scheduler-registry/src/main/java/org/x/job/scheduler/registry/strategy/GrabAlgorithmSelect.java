@@ -6,9 +6,6 @@ import org.apache.zookeeper.CreateMode;
 import org.apache.zookeeper.KeeperException;
 import org.shoper.log.util.LogFactory;
 import org.shoper.log.util.Logger;
-import org.shoper.log.util.annotation.LogModel;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.x.job.scheduler.registry.Scheduler;
 import org.x.job.scheduler.registry.ZookeeperInfo;
 import org.x.job.util.zookeeper.ZKClient;
@@ -23,7 +20,7 @@ import static org.x.job.scheduler.registry.constant.InstanceConst.SCHEDULE_SLAVE
  * 抢占式夺取master
  */
 public class GrabAlgorithmSelect implements ClusterMasterSelect{
-    private static Logger logger = LogFactory.getLogger(org.x.job.scheduler.registry.strategy.GrabAlgorithmSelect.class);
+    private static Logger logger = LogFactory.getLogger(GrabAlgorithmSelect.class);
     private ZookeeperInfo zookeeperInfo;
     ZKClient zkClient;
     /**
