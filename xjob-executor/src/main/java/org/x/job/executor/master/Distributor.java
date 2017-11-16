@@ -3,6 +3,7 @@ package org.x.job.executor.master;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.x.job.commons.job.Job;
 import org.x.job.commons.transfer.Fenshou;
 import org.x.job.executor.pipeline.PipelineExecutor;
@@ -17,6 +18,7 @@ import java.util.List;
  * 任务分发器
  * @author Eightmonth
  */
+@Service
 public class Distributor {
     private static final Logger LOGGER = LoggerFactory.getLogger(Distributor.class);
 
@@ -37,7 +39,7 @@ public class Distributor {
             LOGGER.info(">>>>>>>>> Task getting <<<<<<<<");
 
         for (String addr : machines){
-            messageSender.doSend(addr, new Fenshou(jobs));
+            messageSender.innerSend(addr, jobs);
         }
 
         if(LOGGER.isInfoEnabled())
@@ -45,8 +47,11 @@ public class Distributor {
 
         if(LOGGER.isInfoEnabled())
             LOGGER.info(">>>>>>>>> Task executing <<<<<<<<");
+
         // 传入哪个地址，然后根据地址执行哪台的Job，这里可以考虑成多线程执行。
         // 同时或许需要同步锁。（参考），已有threadLocal
+
+        // 2.0 BUG 因为存值用的threadlocal，所以在这里执行将会有问题。后将处理
         for (String addr : machines) {
             executor(addr);
         }

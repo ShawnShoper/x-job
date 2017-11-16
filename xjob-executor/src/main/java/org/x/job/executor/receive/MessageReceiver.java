@@ -1,9 +1,13 @@
 package org.x.job.executor.receive;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Component;
+import org.x.job.commons.job.Job;
 import org.x.job.commons.transfer.Fenshou;
+import org.x.job.executor.master.Distributor;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -12,6 +16,8 @@ import java.util.Objects;
  */
 @FeignClient("appilcation-name")// 这里待配置
 public class MessageReceiver {
+    @Autowired
+    private Distributor distributor;
 
     /**
      * 从执行器或调度器接收任务参数
@@ -31,9 +37,18 @@ public class MessageReceiver {
                 TaskHandler.getMachines().set(fenShou.getMachines());
             if(!Objects.isNull(fenShou.getOthers()))
                 TaskHandler.getOthers().set(fenShou.getOthers());
+
+            // 收到任务后执行。
+            distributor.doDistribute();
             flag = true;
         }finally {
             return flag;
         }
+    }
+
+    public void innerReceive(List<String> jobs) throws Exception {
+        if(Objects.isNull(jobs) || jobs.size() == 0)
+            return;
+        TaskHandler.getJob().set(jobs);
     }
 }

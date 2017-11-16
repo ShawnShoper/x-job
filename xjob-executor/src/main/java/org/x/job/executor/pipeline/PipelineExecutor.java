@@ -2,6 +2,7 @@ package org.x.job.executor.pipeline;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.x.job.executor.pipeline.support.PipelineSupport;
 import org.x.job.executor.receive.TaskHandler;
 
@@ -9,7 +10,7 @@ import org.x.job.executor.receive.TaskHandler;
  * pipeline执行器
  * @author Eightmonth
  */
-@Component
+@Service
 public class PipelineExecutor {
 
     @Autowired

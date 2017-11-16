@@ -2,15 +2,19 @@ package org.x.job.executor.send;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.x.job.commons.transfer.Fenshou;
 import org.x.job.executor.receive.MessageReceiver;
 
+import java.util.List;
+
 /**
  * 分配任务
  * @author Eightmonth
  */
+@Service
 public class MessageSender {
 
     private MessageReceiver messageReceiver;
@@ -27,6 +31,19 @@ public class MessageSender {
         try{
             //此处为伪码
             /* addr. */messageReceiver.doReceive(fenshou);
+            flag = true;
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            return flag;
+        }
+    }
+
+    public Boolean innerSend(String addr, List<String> jobs) throws Exception {
+        Boolean flag = false;
+        try{
+            //此处为伪码
+            /* addr. */messageReceiver.innerReceive(jobs);
             flag = true;
         }catch (Exception e){
             e.printStackTrace();
