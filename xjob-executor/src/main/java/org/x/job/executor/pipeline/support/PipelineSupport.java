@@ -20,7 +20,11 @@ public class PipelineSupport {
 
     public static List<Job> fixJob(List<String> jobUUIDs) throws Exception {
         // 这里待处理，把JobUUIDs转成job集合，先做个伪代码
-        return new ArrayList<>();
+        List<Job> jobs = new ArrayList<>();
+        for(String uuids : jobUUIDs){
+            jobs.add(new DemoJob(uuids));
+        }
+        return jobs;
     }
 
     public static Section fixSection(List<Job> jobList){

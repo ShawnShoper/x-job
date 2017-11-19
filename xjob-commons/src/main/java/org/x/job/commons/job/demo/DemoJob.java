@@ -11,9 +11,13 @@ public class DemoJob extends BaseJob{
 
     private int i;
 
+    private String s;
+
     public DemoJob(int i) {
         this.i = i;
     }
+
+    public DemoJob(String s) { this.s = s;}
 
     @Override
     public void afterProperties(JobParam param) throws Exception {
@@ -22,7 +26,7 @@ public class DemoJob extends BaseJob{
 
     @Override
     public Object doJob() {
-        System.out.println("job"+i);
+        System.out.println("job"+s);
         return null;
     }
 

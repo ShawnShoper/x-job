@@ -43,7 +43,8 @@ public class MessageSender {
         Boolean flag = false;
         try{
             //此处为伪码
-            /* addr. */messageReceiver.innerReceive(jobs);
+//            /* addr. */messageReceiver.innerReceive(jobs);
+            System.out.println(String.format("%s receive jobID : %s", addr,jobs));
             flag = true;
         }catch (Exception e){
             e.printStackTrace();

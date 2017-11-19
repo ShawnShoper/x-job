@@ -1,5 +1,7 @@
 package org.x.job.executor.receive;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -9,33 +11,33 @@ import java.util.Map;
  */
 public class TaskHandler {
 
-    private static ThreadLocal<List<String>> machines = new ThreadLocal<>(); //all machines
+    private static List<String> machines = new ArrayList<>(); //all machines
 
-    private static ThreadLocal<List<String>> job = new ThreadLocal<>(); // jobID
+    private static List<String> job = new ArrayList<>(); // jobID
 
-    private static ThreadLocal<Map<String, Object>> others = new ThreadLocal<>(); // all others
+    private static Map<String, Object> others = new HashMap<>(); // all others
 
-    public static ThreadLocal<Map<String, Object>> getOthers() {
-        return others;
-    }
-
-    public static void setOthers(ThreadLocal<Map<String, Object>> others) {
-        TaskHandler.others = others;
-    }
-
-    public static ThreadLocal<List<String>> getMachines() {
+    public static List<String> getMachines() {
         return machines;
     }
 
-    public static void setMachines(ThreadLocal<List<String>> machines) {
+    public static void setMachines(List<String> machines) {
         TaskHandler.machines = machines;
     }
 
-    public static ThreadLocal<List<String>> getJob() {
+    public static List<String> getJob() {
         return job;
     }
 
-    public static void setJob(ThreadLocal<List<String>> job) {
+    public static void setJob(List<String> job) {
         TaskHandler.job = job;
+    }
+
+    public static Map<String, Object> getOthers() {
+        return others;
+    }
+
+    public static void setOthers(Map<String, Object> others) {
+        TaskHandler.others = others;
     }
 }

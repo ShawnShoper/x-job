@@ -32,8 +32,8 @@ public class Distributor {
 
         if(LOGGER.isInfoEnabled())
             LOGGER.info(">>>>>>>>> Task action <<<<<<<<");
-        List<String> machines = TaskHandler.getMachines().get();
-        List<String> jobs = TaskHandler.getJob().get();
+        List<String> machines = TaskHandler.getMachines();
+        List<String> jobs = TaskHandler.getJob();
 
         if(LOGGER.isInfoEnabled())
             LOGGER.info(">>>>>>>>> Task getting <<<<<<<<");
@@ -65,6 +65,8 @@ public class Distributor {
     }
 
     public void executor(String addr) throws Exception {
+        System.out.println(String.format("%s start", addr));
         pipelineExecutor.doIt();
+        System.out.println(String.format("%s end", addr));
     }
 }
