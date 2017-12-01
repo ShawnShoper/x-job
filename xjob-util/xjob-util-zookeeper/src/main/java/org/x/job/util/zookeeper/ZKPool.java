@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentMap;
  */
 public class ZKPool {
     static Logger logger = LogFactory.getLogger(ZKPool.class);
-    private static ConcurrentMap<String, ConcurrentMap<String, ZKClient>> zkGroups = new ConcurrentHashMap<String, ConcurrentMap<String, ZKClient>>();
+    private static ConcurrentMap<String, ConcurrentMap<String, ZKClient>> zkGroups = new ConcurrentHashMap<>();
     private static final String DEFAULT = "default";
 
     public static ZKClient creatZkClient(String host, int port, int timeout) {

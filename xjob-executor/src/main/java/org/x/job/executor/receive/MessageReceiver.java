@@ -6,7 +6,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.x.job.commons.job.Job;
 import org.x.job.commons.transfer.Fenshou;
+import org.x.job.executor.election.DefaultElection;
 import org.x.job.executor.master.Distributor;
+import org.x.job.util.zookeeper.ZKClient;
 
 import java.util.List;
 import java.util.Objects;
@@ -28,6 +30,13 @@ public class MessageReceiver {
      * @throws Exception 如果接收失败，反馈接收失败异常
      */
     public Boolean doReceive(Fenshou fenShou) throws Exception {
+        ZKClient zkClient = new ZKClient();
+        if(!new DefaultElection(zkClient).doIt()){
+            zkClient.close();
+            return false; // 反馈是否为master
+        }
+        zkClient.close();
+
         Boolean flag = false;
         try{
             // 不允许没有任务

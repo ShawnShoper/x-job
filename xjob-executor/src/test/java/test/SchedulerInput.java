@@ -34,4 +34,5 @@ public class SchedulerInput extends BaseTest {
         fenshou.setMachines(machines);
         return fenshou;
     }
+
 }
