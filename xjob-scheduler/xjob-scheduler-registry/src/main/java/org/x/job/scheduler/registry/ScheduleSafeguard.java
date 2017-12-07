@@ -31,13 +31,13 @@ public class ScheduleSafeguard {
      * @throws InterruptedException
      */
     public void preemptForMaster() throws InterruptedException {
-        if (!clusterMasterSelect.selectMaster()) {
+        if (!clusterMasterSelect.selectMaster())
             duty = Duty.SLAVER;
-        } else
+        else
             duty = Duty.MASTER;
-        //TODO
-        if (duty.equals(Duty.MASTER)) {
 
+        if (duty.equals(Duty.MASTER)) {
+            //TODO Do task to redis.
         }
     }
 }
