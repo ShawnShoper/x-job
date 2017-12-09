@@ -6,7 +6,9 @@ import org.x.job.scheduler.registry.ZKModule;
 import org.x.job.scheduler.registry.ZookeeperInfo;
 
 /**
- * 用于作为时间同步机.
+ * 用于作为时间同步机.<br>
+ *     向master同步.
+ *
  */
 @Component
 public class ClockSynchronization extends ZKModule{
@@ -17,6 +19,4 @@ public class ClockSynchronization extends ZKModule{
         setZkInfo(zookeeperInfo);
         return super.start();
     }
-
-
 }

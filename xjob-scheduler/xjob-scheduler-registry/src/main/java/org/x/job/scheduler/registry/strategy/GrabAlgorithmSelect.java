@@ -7,11 +7,11 @@ import org.apache.zookeeper.KeeperException;
 import org.shoper.log.util.LogFactory;
 import org.shoper.log.util.Logger;
 import org.x.job.scheduler.registry.Scheduler;
+import org.x.job.scheduler.registry.ZKModule;
 import org.x.job.scheduler.registry.ZookeeperInfo;
 import org.x.job.util.zookeeper.ZKClient;
-import org.x.job.util.zookeeper.ZKPool;
-import org.x.job.util.zookeeper.ZKWatcher;
 
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 import static org.x.job.scheduler.registry.constant.InstanceConst.SCHEDULE_MASTER_NODE;
@@ -19,31 +19,31 @@ import static org.x.job.scheduler.registry.constant.InstanceConst.SCHEDULE_SLAVE
 /**
  * 抢占式夺取master
  */
-public class GrabAlgorithmSelect implements ClusterMasterSelect{
+public class GrabAlgorithmSelect extends ZKModule implements ClusterMasterSelect{
     private static Logger logger = LogFactory.getLogger(GrabAlgorithmSelect.class);
     private ZookeeperInfo zookeeperInfo;
-    ZKClient zkClient;
+
+    @Override
+    public int start() {
+        setZkInfo(zookeeperInfo);
+        return super.start();
+    }
+
     /**
      * Put on  a reentrance
      */
     ReentrantLock reentrantLock = new ReentrantLock(true);
 
-    public void connect() throws InterruptedException {
-        reentrantLock.lockInterruptibly();
-        try {
-            zkClient = ZKPool.creatZkClient(this.getClass().getName(), zookeeperInfo.getHost(), zookeeperInfo.getPort(), 5000, new ScheudleZKWatcher());
-        } finally {
-            reentrantLock.unlock();
-        }
-    }
-
-    public void disconnect() {
-        this.zkClient.close();
-        this.zkClient = null;
-    }
+//    public void connect() throws InterruptedException {
+//        reentrantLock.lockInterruptibly();
+//        try {
+//            zkClient = ZKPool.creatZkClient(this.getClass().getName(), zookeeperInfo.getHost(), zookeeperInfo.getPort(), 5000, new ScheudleZKWatcher());
+//        } finally {
+//            reentrantLock.unlock();
+//        }
+//    }
 
     ObjectMapper objectMapper = new ObjectMapper();
-
     /**
      * Registry schedule master info to registry center
      *
@@ -53,7 +53,7 @@ public class GrabAlgorithmSelect implements ClusterMasterSelect{
         boolean isMaster = false;
         reentrantLock.lockInterruptibly();
         try {
-            isMaster = zkClient.createNode(SCHEDULE_MASTER_NODE, objectMapper.writeValueAsString(scheduled), CreateMode.EPHEMERAL);
+            isMaster = this.getZkClient().createNode(SCHEDULE_MASTER_NODE, objectMapper.writeValueAsString(scheduled), CreateMode.EPHEMERAL);
             if (isMaster) {
                 if (logger.isInfoEnable())
                     logger.info("Create node '%s'", SCHEDULE_SLAVER_NODE);
@@ -72,21 +72,21 @@ public class GrabAlgorithmSelect implements ClusterMasterSelect{
         return false;
     }
 
-    /**
-     * Schedule watcher to monitor zookeeper node.
-     */
-    class ScheudleZKWatcher extends ZKWatcher {
-        @Override
-        public void sessionExpired() throws Exception {
-            reentrantLock.lockInterruptibly();
-            try {
-                disconnect();
-                connect();
-            } catch (Exception e) {
-                logger.error("Zookeeper connection failed.", e);
-            } finally {
-                reentrantLock.unlock();
-            }
-        }
-    }
+//    /**
+//     * Schedule watcher to monitor zookeeper node.
+//     */
+//    class ScheudleZKWatcher extends ZKWatcher {
+//        @Override
+//        public void sessionExpired() throws Exception {
+//            reentrantLock.lockInterruptibly();
+//            try {
+//                disconnect();
+//                connect();
+//            } catch (Exception e) {
+//                logger.error("Zookeeper connection failed.", e);
+//            } finally {
+//                reentrantLock.unlock();
+//            }
+//        }
+//    }
 }
