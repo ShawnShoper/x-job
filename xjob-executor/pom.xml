@@ -50,7 +50,6 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-zookeeper-dependencies</artifactId>
-            <type>pom</type>
         </dependency>
         <dependency>
             <groupId>org.apache.hadoop</groupId>
