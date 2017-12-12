@@ -23,7 +23,9 @@
         <dependency>
             <groupId>com.sun</groupId>
             <artifactId>tools</artifactId>
-            <systemPath>d:/dev/java/jdk1.8.0_131/lib/tools.jar</systemPath>
+            <scope>system</scope>
+            <!--JAVA_HOME config to JDK home-->
+            <systemPath>${env.JAVA_HOME}/lib/tools.jar</systemPath>
         </dependency>
         <dependency>
             <groupId>commons-io</groupId>
