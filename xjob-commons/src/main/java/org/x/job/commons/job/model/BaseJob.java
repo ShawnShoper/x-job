@@ -1,5 +1,6 @@
 package org.x.job.commons.job.model;
 
+import org.x.job.commons.increment.Snowflake;
 import org.x.job.commons.job.Exception.StartupException;
 import org.x.job.commons.job.Job;
 
@@ -10,6 +11,8 @@ import java.util.UUID;
  * @author Eightmonth
  */
 public abstract class BaseJob implements Job {
+
+    private Snowflake snowflake = new Snowflake(12);
 
     protected JobParam param;
 
@@ -39,10 +42,7 @@ public abstract class BaseJob implements Job {
 
     @Override
     public String tid() {
-        /**
-         * 算法有待优化
-         */
-        return UUID.randomUUID().toString();
+        return Long.valueOf(snowflake.next()).toString();
     }
 
     public JobParam getParam() {

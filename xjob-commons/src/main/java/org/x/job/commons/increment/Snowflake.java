@@ -1,4 +1,4 @@
-package org.x.job.executor.increment;
+package org.x.job.commons.increment;
 
 /**
  * 雪花算法（Snowflake）

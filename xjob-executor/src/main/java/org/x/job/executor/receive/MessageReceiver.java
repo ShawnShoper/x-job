@@ -1,15 +1,10 @@
 package org.x.job.executor.receive;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
-import org.x.job.commons.job.Job;
 import org.x.job.commons.transfer.Fenshou;
-import org.x.job.executor.election.DefaultElection;
 import org.x.job.executor.election.Election;
 import org.x.job.executor.master.Distributor;
-import org.x.job.util.zookeeper.ZKClient;
 
 import java.util.List;
 import java.util.Objects;
@@ -64,4 +59,6 @@ public class MessageReceiver {
             return;
         TaskHandler.setJob(jobs);
     }
+
+
 }

@@ -2,9 +2,14 @@ package org.x.job.executor.pipeline.support;
 
 import org.x.job.commons.job.Job;
 import org.x.job.commons.job.demo.DemoJob;
+import org.x.job.commons.utils.HDFSUtils;
+import org.x.job.dynamiccompile.JDKCompile;
 import org.x.job.executor.pipeline.Pipeline;
 import org.x.job.executor.pipeline.Section;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.*;
 
 /**
@@ -22,7 +27,7 @@ public class PipelineSupport {
         // 这里待处理，把JobUUIDs转成job集合，先做个伪代码
         List<Job> jobs = new ArrayList<>();
         for(String uuids : jobUUIDs){
-            jobs.add(new DemoJob(uuids));
+            jobs.add(getJobByPath(uuids));
         }
         return jobs;
     }
@@ -37,5 +42,20 @@ public class PipelineSupport {
             return sct;
         Section s = new Section(sct, jobs.get(i));
         return push(s, jobs, ++i);
+    }
+
+    private static Job getJobByPath(String path){
+        try {
+            byte[] javaFile = HDFSUtils.readHDFSFile(path);
+            File file = new File(path);
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(javaFile);
+
+            Class<?> class1 = JDKCompile.getClass(file);
+            Object object = class1.newInstance();
+            return (Job) object;
+        } catch (Exception e){
+            return null;
+        }
     }
 }
