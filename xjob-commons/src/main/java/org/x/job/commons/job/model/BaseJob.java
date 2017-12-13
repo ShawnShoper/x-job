@@ -12,8 +12,6 @@ import java.util.UUID;
  */
 public abstract class BaseJob implements Job {
 
-    private Snowflake snowflake = new Snowflake(12);
-
     protected JobParam param;
 
     @Override
@@ -31,7 +29,10 @@ public abstract class BaseJob implements Job {
         System.out.println("任务执行完就结束了。。。。");
     }
 
-    public void defaultConfig() throws Exception {
+    /**
+     *  使用默认配置
+     */
+    public void defaultConfig() {
         param = null;
     }
 
@@ -41,8 +42,8 @@ public abstract class BaseJob implements Job {
     }
 
     @Override
-    public String tid() {
-        return Long.valueOf(snowflake.next()).toString();
+    public String getTid() {
+        return param.getTid();
     }
 
     public JobParam getParam() {

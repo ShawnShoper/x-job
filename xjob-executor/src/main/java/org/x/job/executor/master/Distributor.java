@@ -64,6 +64,7 @@ public class Distributor {
         return null;
     }
 
+    // TODO 待整理
     public void executor(String addr) throws Exception {
         System.out.println(String.format("%s start", addr));
         pipelineExecutor.doIt();

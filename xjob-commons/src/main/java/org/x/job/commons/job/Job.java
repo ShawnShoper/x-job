@@ -40,7 +40,7 @@ public interface Job {
     /**
      * 拿到当前任务ID
      */
-    String tid();
+    String getTid();
 
     /**
      * Job中的核心方法之一，

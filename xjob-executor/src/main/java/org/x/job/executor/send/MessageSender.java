@@ -39,6 +39,7 @@ public class MessageSender {
         }
     }
 
+    // TODO 待整理
     public Boolean innerSend(String addr, List<String> jobs) throws Exception {
         Boolean flag = false;
         try{

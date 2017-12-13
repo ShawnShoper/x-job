@@ -1,16 +1,17 @@
 package org.x.job.executor.pipeline.support;
 
+import org.x.job.commons.increment.Snowflake;
 import org.x.job.commons.job.Job;
-import org.x.job.commons.job.demo.DemoJob;
 import org.x.job.commons.utils.HDFSUtils;
 import org.x.job.dynamiccompile.JDKCompile;
-import org.x.job.executor.pipeline.Pipeline;
 import org.x.job.executor.pipeline.Section;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 
 /**
  * 把一个整体的Job生成Section
@@ -18,6 +19,25 @@ import java.util.*;
  * @author Eightmonth
  */
 public class PipelineSupport {
+
+    private static String defaultPath = System.getProperty("user.dir")+"/tmp";
+
+    public static String nextRandomName(){
+        return defaultPath + "/" +new Snowflake(randomSuffix());
+    }
+
+    private static int randomSuffix(){
+        Random random = new Random(1024);
+        int max = 0;
+        for(int i = 0; i < 10; i++){
+            int curr = random.nextInt();
+            if(i == 0) max = random.nextInt();
+            else if(max < curr) max = curr;
+        }
+        return max;
+    }
+
+    private PipelineSupport(){}
 
     public static Section jobToSection(List<String> jobUUIDs) throws Exception {
         return fixSection(fixJob(jobUUIDs));
@@ -45,10 +65,9 @@ public class PipelineSupport {
     }
 
     private static Job getJobByPath(String path){
-        try {
+        File file = new File(nextRandomName());
+        try (FileOutputStream fos = new FileOutputStream(file)){
             byte[] javaFile = HDFSUtils.readHDFSFile(path);
-            File file = new File(path);
-            FileOutputStream fos = new FileOutputStream(file);
             fos.write(javaFile);
 
             Class<?> class1 = JDKCompile.getClass(file);
@@ -58,4 +77,5 @@ public class PipelineSupport {
             return null;
         }
     }
+
 }
