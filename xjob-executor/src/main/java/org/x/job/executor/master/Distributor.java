@@ -5,13 +5,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.x.job.commons.job.Job;
-import org.x.job.commons.transfer.Fenshou;
+import org.x.job.executor.feign.PipelineExecutorFeign;
 import org.x.job.executor.pipeline.PipelineExecutor;
-import org.x.job.executor.pipeline.support.PipelineSupport;
 import org.x.job.executor.receive.TaskHandler;
 import org.x.job.executor.send.MessageSender;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,10 +21,9 @@ public class Distributor {
     private static final Logger LOGGER = LoggerFactory.getLogger(Distributor.class);
 
     @Autowired
-    private PipelineExecutor pipelineExecutor;
-
-    @Autowired
     private MessageSender messageSender;
+    @Autowired
+    private PipelineExecutorFeign pipelineExecutorFeign;
 
     public void doDistribute() throws Exception {
 
@@ -53,7 +50,7 @@ public class Distributor {
 
         // 2.0 BUG 因为存值用的threadlocal，所以在这里执行将会有问题。后将处理
         for (String addr : machines) {
-            executor(addr);
+            execute(addr);
         }
         if(LOGGER.isInfoEnabled())
             LOGGER.info(">>>>>>>>> Task end <<<<<<<<");
@@ -65,9 +62,9 @@ public class Distributor {
     }
 
     // TODO 待整理
-    public void executor(String addr) throws Exception {
+    public void execute(String addr) throws Exception {
         System.out.println(String.format("%s start", addr));
-        pipelineExecutor.doIt();
+        pipelineExecutorFeign.doIt();
         System.out.println(String.format("%s end", addr));
     }
 }
