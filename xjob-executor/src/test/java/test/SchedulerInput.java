@@ -1,7 +1,6 @@
 package test;
 
 import basetest.BaseTest;
-import ch.qos.logback.core.net.SyslogOutputStream;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.x.job.commons.transfer.Fenshou;

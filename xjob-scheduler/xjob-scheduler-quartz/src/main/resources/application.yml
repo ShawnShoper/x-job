@@ -1,0 +1,29 @@
+# web 配置
+server:
+  port: 7902
+
+# spring 配置
+spring:
+  jpa:
+    generate-ddl: false
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+  datasource:
+    platform: h2
+    schema: classpath:scheme.sql
+    data: classpath:data.sql
+
+# 日志配置
+logging:
+  level:
+    root: info
+    org:
+      hibernate: info
+        type:
+          descriptor:
+            sql:
+              BasicBinder: trace
+              BasicExtractor: trace
+    com:
+      itmuch: debug

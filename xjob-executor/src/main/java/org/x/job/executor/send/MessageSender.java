@@ -1,14 +1,10 @@
 package org.x.job.executor.send;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.x.job.commons.transfer.Fenshou;
 import org.x.job.executor.feign.ReceiveFeign;
 import org.x.job.executor.feign.SendFeign;
-import org.x.job.executor.receive.MessageReceiver;
 
 import java.util.List;
 
